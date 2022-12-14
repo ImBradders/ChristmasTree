@@ -1,4 +1,6 @@
 .idea/
 
+venv/
+
 ChristmasTree/bin
 ChristmasTree/obj
