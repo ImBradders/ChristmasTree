@@ -1,66 +1,88 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChristmasTree
 {
-    class TreeCreator
+    public class TreeCreator
     {
-        Random numberGen;
-        int rows;
+        protected int treeSize;
+        protected bool hasPot;
+        
         public TreeCreator()
         {
-            this.numberGen = new Random();
-            this.rows = 0;
+            Construct(10, true);
         }
-        public void CreateTree(int rows)
+
+        public TreeCreator(int size)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            this.rows = rows;
+            Construct(size, true);
+        }
+        
+        public TreeCreator(int size, bool hasPot)
+        {
+            Construct(size, hasPot);
+        }
+
+        private void Construct(int size, bool hasPot)
+        {
+            this.treeSize = size;
+            this.hasPot = hasPot;
+        }
+        
+        public void CreateTree()
+        {
             PrintTree();
-            PrintPlantPot();
+            if (hasPot)
+                PrintPlantPot();
+            else
+                PrintTrunk();
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        private void PrintTree()
+        protected virtual void PrintTree()
         {
-            int spaces = this.rows;
+            Console.ForegroundColor = ConsoleColor.Green;
+            int spaces = this.treeSize;
 
-            for (int depth = 0; depth < this.rows; depth++)
+            for (int depth = 0; depth < this.treeSize; depth++)
             {
-                for (int whitespace = 0; whitespace < spaces; whitespace++)
-                {
-                    Console.Write(" ");
-                }
+                PrintSpaces(spaces);
                 spaces--;
-
-                for (int width = 0; width <= depth; width++)
-                {
-                    if (numberGen.Next() % 8 == 0)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    }
-                    Console.Write("*");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                }
-                for (int width = 0; width <= depth; width++)
-                {
-                    if (numberGen.Next() % 8 == 0)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    }
-                    Console.Write("*");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                }
-                Console.WriteLine();
+                
+                PrintTreeLeft(depth);
+                PrintTreeRight(depth);
             }
+        }
+
+        protected void PrintSpaces(int amount)
+        {
+            for (int spaces = 0; spaces < amount; spaces++)
+            {
+                Console.Write(" ");
+            }
+        }
+        
+        protected virtual void PrintTreeLeft(int width)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int counter = 0; counter <= width; counter++)
+            {
+                Console.Write("*");
+            }
+        }
+
+        protected virtual void PrintTreeRight(int width)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int counter = 0; counter <= width; counter++)
+            {
+                Console.Write("*");
+            }
+            Console.WriteLine();
         }
 
         private void PrintPlantPot()
         {
-            int spacesRequired = this.rows - 3;
+            int spacesRequired = this.treeSize - 2;
             PrintSpaces(spacesRequired);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("  **  ");
@@ -71,13 +93,17 @@ namespace ChristmasTree
             Console.WriteLine("******");
             Console.ForegroundColor = ConsoleColor.Green;
         }
-
-        private void PrintSpaces(int spacesRequired)
+        
+        private void PrintTrunk()
         {
-            for (int ppSpaces = 0; ppSpaces <= spacesRequired; ppSpaces++)
+            int spacesRequired = this.treeSize - 2;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            for (int count = 0; count < 3; count++)
             {
-                Console.Write(" ");
+                PrintSpaces(spacesRequired);
+                Console.WriteLine("  **  ");
             }
+            Console.ForegroundColor = ConsoleColor.Green;
         }
     }
 }
