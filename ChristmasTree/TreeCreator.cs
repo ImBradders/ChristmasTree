@@ -9,7 +9,7 @@ namespace ChristmasTree
         
         public TreeCreator()
         {
-            Construct(10, true);
+            Construct(10, false);
         }
 
         public TreeCreator(int size)
@@ -37,7 +37,7 @@ namespace ChristmasTree
                 PrintTrunk();
         }
 
-        protected virtual void PrintTree()
+        private void PrintTree()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             int spaces = this.treeSize - 1;
@@ -52,7 +52,7 @@ namespace ChristmasTree
             }
         }
 
-        protected void PrintSpaces(int amount)
+        private void PrintSpaces(int amount)
         {
             for (int spaces = 0; spaces < amount; spaces++)
             {
@@ -60,7 +60,7 @@ namespace ChristmasTree
             }
         }
         
-        protected virtual void PrintAsterisks(int width)
+        private void PrintAsterisks(int width)
         {
             PrintTreeHalf(width);
             PrintTreeHalf(width);

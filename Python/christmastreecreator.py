@@ -3,7 +3,7 @@ from termcolor import colored
 import random
 
 class ChristmasTreeCreator(TreeCreator):
-    def __init__(self, size=10, has_pot=False, bauble_percentage=10):
+    def __init__(self, size=10, has_pot=True, bauble_percentage=10):
         self.bauble_percentage = bauble_percentage
         super().__init__(size=size, has_pot=has_pot)
 

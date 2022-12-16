@@ -4,42 +4,42 @@ namespace ChristmasTree
 {
     public class ChristmasTreeCreator : TreeCreator
     {
-        Random numberGen;
-        int baublePercentage;
+        private Random numberGen;
+        private int baublePercentage;
         
         public ChristmasTreeCreator()
         {
-            Construct(10, 10, true);
+            Construct(10, true, 10);
         }
 
         public ChristmasTreeCreator(int size)
         {
-            Construct(size, 10, true);
+            Construct(size, true, 10);
         }
 
-        public ChristmasTreeCreator(int size, int baublePercentage)
+        public ChristmasTreeCreator(int size, bool hasPot)
         {
-            Construct(size, baublePercentage, true);
+            Construct(size, hasPot, 10);
         }
         
-        public ChristmasTreeCreator(int size, int baublePercentage, bool hasPot)
+        public ChristmasTreeCreator(int size, int baublePercentage)
         {
-            Construct(size, baublePercentage, hasPot);
+            Construct(size, true, baublePercentage);
+        }
+        
+        public ChristmasTreeCreator(int size, bool hasPot, int baublePercentage)
+        {
+            Construct(size, hasPot, baublePercentage);
         }
 
-        private void Construct(int size, int baublePercentage, bool hasPot)
+        private void Construct(int size, bool hasPot, int baublePercentage)
         {
             this.numberGen = new Random();
             this.treeSize = size;
-            this.baublePercentage = baublePercentage;
             this.hasPot = hasPot;
+            this.baublePercentage = baublePercentage;
         }
-
-        protected override void PrintAsterisks(int width)
-        {
-            PrintTreeHalf(width);
-            PrintTreeHalf(width);
-        }
+        
         protected override void PrintTreeHalf(int width)
         {
             for (int counter = 0; counter <= width; counter++)
