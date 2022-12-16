@@ -35,21 +35,20 @@ namespace ChristmasTree
                 PrintPlantPot();
             else
                 PrintTrunk();
-            Console.ForegroundColor = ConsoleColor.White;
         }
 
         protected virtual void PrintTree()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            int spaces = this.treeSize;
+            int spaces = this.treeSize - 1;
 
             for (int depth = 0; depth < this.treeSize; depth++)
             {
                 PrintSpaces(spaces);
                 spaces--;
                 
-                PrintTreeLeft(depth);
-                PrintTreeRight(depth);
+                PrintAsterisks(depth);
+                Console.WriteLine();
             }
         }
 
@@ -61,49 +60,40 @@ namespace ChristmasTree
             }
         }
         
-        protected virtual void PrintTreeLeft(int width)
+        protected virtual void PrintAsterisks(int width)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            for (int counter = 0; counter <= width; counter++)
-            {
-                Console.Write("*");
-            }
+            PrintTreeHalf(width);
+            PrintTreeHalf(width);
         }
-
-        protected virtual void PrintTreeRight(int width)
+        protected virtual void PrintTreeHalf(int width)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
             for (int counter = 0; counter <= width; counter++)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("*");
             }
-            Console.WriteLine();
         }
 
         private void PrintPlantPot()
         {
-            int spacesRequired = this.treeSize - 2;
-            PrintSpaces(spacesRequired);
+            PrintSpaces(this.treeSize - 1);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("  **  ");
-            PrintSpaces(spacesRequired);
+            Console.WriteLine("**");
+            PrintSpaces(this.treeSize - 3);
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("******");
-            PrintSpaces(spacesRequired);
+            PrintSpaces(this.treeSize - 3);
             Console.WriteLine("******");
-            Console.ForegroundColor = ConsoleColor.Green;
         }
         
         private void PrintTrunk()
         {
-            int spacesRequired = this.treeSize - 2;
             Console.ForegroundColor = ConsoleColor.Yellow;
             for (int count = 0; count < 3; count++)
             {
-                PrintSpaces(spacesRequired);
-                Console.WriteLine("  **  ");
+                PrintSpaces(this.treeSize - 1);
+                Console.WriteLine("**");
             }
-            Console.ForegroundColor = ConsoleColor.Green;
         }
     }
 }

@@ -35,48 +35,26 @@ namespace ChristmasTree
             this.hasPot = hasPot;
         }
 
-        protected override void PrintTree()
+        protected override void PrintAsterisks(int width)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            int spaces = this.treeSize;
-
-            for (int depth = 0; depth < this.treeSize; depth++)
-            {
-                PrintSpaces(spaces);
-                spaces--;
-                
-                PrintTreeLeft(depth);
-                PrintTreeRight(depth);
-            }
+            PrintTreeHalf(width);
+            PrintTreeHalf(width);
         }
-
-        protected override void PrintTreeLeft(int width)
+        protected override void PrintTreeHalf(int width)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
             for (int counter = 0; counter <= width; counter++)
             {
                 if (numberGen.Next() % 100 < baublePercentage)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("*");
                 }
-                Console.Write("*");
-                Console.ForegroundColor = ConsoleColor.Green;
-            }
-        }
-
-        protected override void PrintTreeRight(int width)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            for (int counter = 0; counter <= width; counter++)
-            {
-                if (numberGen.Next() % 100 < baublePercentage)
+                else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("*");
                 }
-                Console.Write("*");
-                Console.ForegroundColor = ConsoleColor.Green;
             }
-            Console.WriteLine();
         }
     }
 }
