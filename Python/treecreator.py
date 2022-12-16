@@ -1,7 +1,7 @@
 from termcolor import colored
 
 
-class tree_creator:
+class TreeCreator:
     def __init__(self, size=10, has_pot=False):
         self.size = size
         self.has_pot = has_pot
@@ -15,19 +15,17 @@ class tree_creator:
 
     def print_tree(self):
         spaces = self.size
-
         for count in range(self.size + 1):
             self.print_spaces(spaces)
             spaces -= 1
-            self.print_tree_left(count)
-            self.print_tree_right(count)
+            self.print_asterisks(count)
             print()
 
-    def print_tree_left(self, width):
-        for count in range(width):
-            print(colored("*", "green"), end="")
+    def print_asterisks(self, width):
+        self.print_tree_half(width)
+        self.print_tree_half(width)
 
-    def print_tree_right(self, width):
+    def print_tree_half(self, width):
         for count in range(width):
             print(colored("*", "green"), end="")
 
@@ -36,18 +34,15 @@ class tree_creator:
             print(" ", end="")
 
     def print_pot(self):
-        spaces = self.size - 1
-        self.print_spaces(spaces)
+        self.print_spaces(self.size - 1)
         print(colored("**", "yellow"))
 
-        spaces = self.size - 3
-        self.print_spaces(spaces)
+        self.print_spaces(self.size - 3)
         print(colored("******", "magenta"))
-        self.print_spaces(spaces)
+        self.print_spaces(self.size - 3)
         print(colored("******", "magenta"))
 
     def print_trunk(self):
-        spaces = self.size - 1
         for count in range(3):
-            self.print_spaces(spaces)
+            self.print_spaces(self.size - 1)
             print(colored("**", "yellow"))
